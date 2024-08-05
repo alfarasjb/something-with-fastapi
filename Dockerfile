@@ -1,21 +1,20 @@
-FROM python:3.12.3-bookworm AS builder
-
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1
-WORKDIR /app
-
-
-RUN python -m venv /app/.venv
-COPY requirements.txt ./
-RUN /app/.venv/bin/pip install -r requirements.txt
+# Use the official Python image as a base
 FROM python:3.12.3-slim-bookworm
-WORKDIR /app
-COPY --from=builder /app/.venv /app/.venv/
-COPY . .
-# Ensure the virtual environment's bin directory is in the PATH
-# Need this to run uvicorn
-ENV PATH="/app/.venv/bin:$PATH"
 
-# Expose port
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements file into the container
+COPY requirements.txt ./
+
+# Install dependencies directly into the system Python environment
+RUN pip install -r requirements.txt
+
+# Copy the application code into the final image
+COPY . .
+
+# Expose port 8080 to the outside world
 EXPOSE 8080
+
+# Define the command to run the application
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
