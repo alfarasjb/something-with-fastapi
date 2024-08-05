@@ -3,6 +3,7 @@ import logging
 from fastapi import FastAPI
 from fastapi import Request
 from fastapi.responses import JSONResponse
+
 from src.services import api_response_models as response_models
 from src.services.chat import ChatModel
 from src.utils.generic_responses import internal_server_error
