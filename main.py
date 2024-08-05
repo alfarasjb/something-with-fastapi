@@ -1,7 +1,7 @@
 import uvicorn
 import logging
 
-from src.services.api import app
+from src.server.api import app
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
