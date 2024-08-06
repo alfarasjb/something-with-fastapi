@@ -1,5 +1,4 @@
 from typing import Callable
-
 from fastapi import FastAPI, Request, Response
 
 from src.database.database import SessionLocal
@@ -14,6 +13,7 @@ API = "/api"
 DB = "/db"
 
 app = FastAPI()
+
 
 @app.middleware("http")
 async def db_session_middleware(request: Request, call_next: Callable) -> Response:
