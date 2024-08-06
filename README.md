@@ -1,5 +1,30 @@
 # ExcelAI - Server 
 
+### Set Up Environment Variables 
+- Create a `.env` file and add your environment variables:
+  - OPENAI_API_KEY=your-openai-api-key
+  - DB_HOST=your-database-hostname
+  - DB_PORT=your-database-port
+  - DB_USERNAME=your-database-username
+  - DB_PASSWORD=your-database-password 
+  - DB_NAME=your-database-name 
+
+### Obtain and Set Up ngrok 
+- Download and install ngrok from [ngrok's website](https://ngrok.com/download) 
+- Start with the following command to expose port 5432 (Port for postgresql)
+```bash
+ngrok tcp 5432
+```
+- The ngrok url will be as follows: `tcp://0.tcp.ap.ngrok.io:<PORT>`
+
+### Run the Server 
+- Enter the following command on the terminal to run the server 
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8080
+```
+
+### Testing the API 
+- Open your browser and enter the url `http://localhost:8080/docs`. This will allow you to test the API locally. 
 ### Fly.io Deployment
 - On the command line, run `fly launch`
 - Add necessary secrets to Fly.io 
